@@ -1,4 +1,4 @@
-import useState from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -15,6 +15,7 @@ export const jobTypes = ["Full Time", "Part Time", "Internship", "Freelance"];
 
 const Welcome = () => {
   const router = useRouter();
+  const [activeJobType, setActiveJobType] = useState(jobTypes[0]);
 
   return (
     <View>
@@ -40,6 +41,26 @@ const Welcome = () => {
             style={styles.searchBtnImage}
           />
         </TouchableOpacity>
+      </View>
+
+      <View style={styles.tabsContainer}>
+        <FlatList
+          data={jobTypes}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.tab(activeJobType, item)}
+              onPress={() => {
+                setActiveJobType(item);
+                router.push("/search/" + item);
+              }}
+            >
+              <Text style={styles.tabText(activeJobType, item)}>{item}</Text>
+            </TouchableOpacity>
+          )}
+          keyExtractor={(item) => item}
+          contentContainerStyle={{ columnGap: SIZES.small }}
+          horizontal
+        />
       </View>
     </View>
   );

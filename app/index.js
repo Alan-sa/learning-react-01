@@ -30,7 +30,7 @@ const Home = () => {
         <View
           style={{
             flex: 1,
-            paddingHorizontal: SIZES.padding,
+            paddingHorizontal: SIZES.medium,
           }}
         >
           <Welcome />
